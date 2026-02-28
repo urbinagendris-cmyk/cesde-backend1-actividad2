@@ -1,53 +1,44 @@
 package com.example;
 
-
 public class CuentaBancaria {
-    // Atributos privados para cumplir con el encapsulamiento
-    private String numeroCuenta;
+    private String titular;
     private double saldo;
-    private String tipoCuenta;
 
-    // Constructor completo para inicializar la cuenta
-    public CuentaBancaria(String numeroCuenta, double saldo, String tipoCuenta) {
-        this.numeroCuenta = numeroCuenta;
-        this.saldo = saldo;
-        this.tipoCuenta = tipoCuenta;
+    // Constructor con validación de saldo inicial
+    public CuentaBancaria(String titular, double saldoInicial) {
+        this.titular = titular;
+        if (saldoInicial < 0) {
+            this.saldo = 0; // O la lógica que prefieras, pero debe validarse
+        } else {
+            this.saldo = saldoInicial;
+        }
     }
 
-    // Método para depositar: El saldo solo cambia si la cantidad es positiva (> 0)
+    // Getter y Setter para Titular
+    public String getTitular() {
+        return titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
+    // SOLO GETTER para Saldo
+    public double getSaldo() {
+        return saldo;
+    }
+
     public void depositar(double cantidad) {
         if (cantidad > 0) {
             this.saldo += cantidad;
-            System.out.println("Depósito exitoso. Nuevo saldo: " + this.saldo);
-        } else {
-            System.out.println("La cantidad a depositar debe ser mayor a 0");
         }
     }
 
-    // Método para retirar: Valida que la cantidad sea positiva y que existan fondos
     public void retirar(double cantidad) {
-        if (cantidad <= 0) {
-            System.out.println("La cantidad a retirar debe ser mayor a 0");
-        } else if (cantidad <= this.saldo) {
+        if (cantidad > 0 && cantidad <= this.saldo) {
             this.saldo -= cantidad;
-            System.out.println("Retiro exitoso. Saldo restante: " + this.saldo);
-        } else {
-            // Mensaje exacto según lo visto en la rúbrica del video
+        } else if (cantidad > this.saldo) {
             System.out.println("Fondos insuficientes");
         }
-    }
-
-    // Getter para el saldo: Permite consultar el dinero sin modificarlo directamente
-    public double getSaldo() {
-        return this.saldo;
-    }
-
-    // Getters adicionales (opcionales pero recomendados para buena práctica)
-    public String getNumeroCuenta() {
-        return numeroCuenta;
-    }
-
-    public String getTipoCuenta() {
-        return tipoCuenta;
     }
 }

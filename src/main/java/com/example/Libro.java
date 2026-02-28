@@ -5,14 +5,21 @@ public class Libro {
     private String autor;
     private int paginas;
 
-    // Constructor por defecto
+    // 1. Constructor Vacío (Valores exactos)
     public Libro() {
         this.titulo = "Desconocido";
         this.autor = "Anónimo";
         this.paginas = 0;
     }
 
-    // Constructor con parámetros
+    // 2. NUEVO: Constructor con Título y Autor (Paginas en 0)
+    public Libro(String titulo, String autor) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.paginas = 0;
+    }
+
+    // 3. Constructor Completo
     public Libro(String titulo, String autor, int paginas) {
         this.titulo = titulo;
         this.autor = autor;
@@ -20,7 +27,6 @@ public class Libro {
     }
 
     public void mostrarDetalles() {
-        // Formato exacto según la rúbrica
         System.out.println("Libro: " + titulo + " | Autor: " + autor + " | Páginas: " + paginas);
     }
 }

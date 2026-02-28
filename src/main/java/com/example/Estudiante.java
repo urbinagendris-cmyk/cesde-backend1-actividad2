@@ -1,24 +1,47 @@
 package com.example;
 
-
 public class Estudiante {
     private String nombre;
     private int edad;
-    private String curso;
+    private double promedio;
 
-    // Constructor con 2 parámetros
-    public Estudiante(String nombre, int edad) {
-        this(nombre, edad, "Ninguno"); // Llama al constructor de 3 parámetros
+    // 1. Constructor Vacío
+    public Estudiante() {
+        this.nombre = "Sin nombre";
+        this.edad = 0;
+        this.promedio = 0.0;
     }
 
-    // Constructor con 3 parámetros (Completo)
-    public Estudiante(String nombre, int edad, String curso) {
+    // 2. Constructor Completo
+    public Estudiante(String nombre, int edad, double promedio) {
         this.nombre = nombre;
-        this.edad = edad;
-        this.curso = curso;
+        setEdad(edad); // Usamos el setter para validar desde el constructor
+        this.promedio = promedio;
+    }
+
+    // Getters y Setters con validación
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+
+    public int getEdad() { return edad; }
+    public void setEdad(int edad) {
+        if (edad > 0) {
+            this.edad = edad;
+        } else {
+            this.edad = 0; // Validación requerida
+        }
+    }
+
+    public double getPromedio() { return promedio; }
+    public void setPromedio(double promedio) { this.promedio = promedio; }
+
+    // Método lógico solicitado
+    public boolean haAprobado() {
+        return this.promedio >= 3.0;
     }
 
     public void mostrarInfo() {
-        System.out.println("Nombre: " + nombre + ", Edad: " + edad + ", Curso: " + curso);
+        String estado = haAprobado() ? "Aprobado" : "Reprobado";
+        System.out.println("Estudiante: " + nombre + " | Edad: " + edad + " | Promedio: " + promedio + " | Estado: " + estado);
     }
 }
